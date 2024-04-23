@@ -1,0 +1,14 @@
+lm
+liuchan
+dy
+wangwu
+admin
+root
+user
+test
+accountAdmin01
+testuser
+accountUser
+reportsUser
+appAdmin
+mongouser
