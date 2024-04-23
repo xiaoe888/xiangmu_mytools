@@ -19,6 +19,8 @@
 # 导入模块
 import hashlib
 import datetime
+import multiprocessing
+
 import Burp_spider
 import Burp_sudomain
 import PortScanner
@@ -41,7 +43,7 @@ def Bunner():
     print("   _      ___         ______    __            ______            __    ")
     print("  | | /| / (_)__  ___/ / __/__ / /____ __    / __/ /  ___ _____/ /__  ")
     print("  | |/ |/ / / _ \/ _  / _/(_-</  '_/ // /   _\ \/ _ \/ _ `/ __/  '_/  ")
-    print("  |__/|__/_/_//_/\_,_/___/___/_/\_\\_, /   /___/_//_/\_,_/_/ /_/\_\   ")
+    print("  |__/|__/_/_//_/\_,_/___/___/_/\__, /   /___/_//_/\_,_/_/ /_/\_\   ")
     print("                                  /___/                               ")
     print("作者：WindEsky")
     print("本工具仅供学习交流使用，不得用于非法用途，否则后果自负")

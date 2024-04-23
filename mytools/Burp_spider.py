@@ -1,7 +1,8 @@
+import multiprocessing
+
 import requests
 from bs4 import BeautifulSoup
 from multiprocessing import Pool
-
 
 # 爬虫
 def get_last_page(url):
@@ -41,7 +42,7 @@ def crawl_stackoverflow_questions(url):
             question_titles = soup.find_all('h3', class_='s-post-summary--content-title')
             if question_titles:
                 # 将问题标题写入Markdown文件
-                with open('stackoverflow_questions.md', 'a', encoding='utf-8') as f:
+                with open('./stackoverflow_questions.md', 'a', encoding='utf-8') as f:
                     for title in question_titles:
                         # 找到问题标题下的第一个链接标签
                         link = title.find_next('a', class_='s-link')
@@ -62,6 +63,9 @@ def generate_urls(base_url, start_page, end_page):
     return urls
 
 def start_spider():
+    # 打包成exe文件时，需要加上这句代码
+    multiprocessing.freeze_support()
+
     base_url = "https://stackoverflow.com/questions"
     start_page = 1
     # 获取最后一页的页码
@@ -70,9 +74,17 @@ def start_spider():
         end_page = last_page
         urls = generate_urls(base_url, start_page, end_page)
 
+        # 清空Markdown文件
+        with open('./stackoverflow_questions.md', 'w', encoding='utf-8') as f:
+            f.write("")
+
         # 使用进程池并发保存页面
-        with Pool(processes=4) as pool:
-            pool.map(crawl_stackoverflow_questions, urls)
+        pool = Pool(processes=4)
+        pool.map(crawl_stackoverflow_questions, urls)
+        pool.close()
+        pool.join()
+
+
 
         print("问题已成功保存到stackoverflow_questions.md文件中")
     else:
