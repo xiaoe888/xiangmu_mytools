@@ -4,7 +4,9 @@ import requests
 from bs4 import BeautifulSoup
 from multiprocessing import Pool
 
-# 爬虫
+# 爬虫,获取stackoverflow的问题标题
+# https://stackoverflow.com/questions
+# 这个def get_last_page(url)函数是获取最后一页的页码
 def get_last_page(url):
     try:
         # 发送GET请求获取网页内容
@@ -31,6 +33,7 @@ def get_last_page(url):
         return None
 
 
+# 爬虫,获取stackoverflow的问题标题的函数
 def crawl_stackoverflow_questions(url):
     try:
         # 发送GET请求获取网页内容
@@ -55,6 +58,7 @@ def crawl_stackoverflow_questions(url):
     except Exception as e:
         print(f"发生异常: {e}")
 
+# 生成所有页面的URL
 def generate_urls(base_url, start_page, end_page):
     urls = []
     for page in range(start_page, end_page + 1):
@@ -62,6 +66,7 @@ def generate_urls(base_url, start_page, end_page):
         urls.append(url)
     return urls
 
+# 爬虫入口函数
 def start_spider():
     # 打包成exe文件时，需要加上这句代码
     multiprocessing.freeze_support()

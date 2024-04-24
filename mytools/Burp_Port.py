@@ -73,6 +73,7 @@ def login_burp_server(url):
     with open('./password.txt') as f:
         pwd_list = f.readlines()
 
+    # ThreadPoolExecutor(max_workers=50)表示最多50个线程
     with ThreadPoolExecutor(max_workers=50) as executor:
         for username in user_list:
             for password in pwd_list:

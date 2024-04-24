@@ -22,6 +22,7 @@ class PortScanner:
         for i in range(1, 255):
             for j in range(0, 65535, self.step):
                 ip = self.segment + str(i)
+                # 创建线程
                 Thread(target=self.scan_ip_port, args=(ip, j, j+self.step)).start()
 
 
